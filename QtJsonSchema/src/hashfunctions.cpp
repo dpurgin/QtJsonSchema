@@ -1,6 +1,7 @@
 #include "hashfunctions.h"
 #include "pointer/jsonpointer.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 uint qHash(const QJsonValue& json, uint seed)
 {
   switch (json.type()) {
@@ -28,6 +29,7 @@ uint qHash(const QJsonObject& object, uint seed)
 {
   return std::accumulate(object.constBegin(), object.constEnd(), seed, HashCombine());
 }
+#endif
 
 uint qHash(const JsonPointer& ptr, uint seed)
 {
